@@ -2,8 +2,9 @@
 	<div class="login">
 		<div class="box">
 			<h1 class="title">互市宝后台管理系统 - 登录</h1>
-			<el-input placeholder="请输入帐号" prefix-icon="el-icon-edit-outline" v-model="userName"></el-input>
-			<el-input placeholder="请输入密码" prefix-icon="el-icon-setting" class="mt_15" v-model="passWord" type="password"></el-input>
+			<!-- <el-input placeholder="请输入帐号" prefix-icon="el-icon-edit-outline" v-model="userName"></el-input> -->
+			<el-input placeholder="请输入帐号" prefix-icon="fa fa-user-circle fa-lg" v-model="userName"></el-input>
+			<el-input placeholder="请输入密码" prefix-icon="fa fa-lock fa-lg" class="mt_15" v-model="passWord" type="password"></el-input>
 
 			<el-button type="primary" @click="login" class="ow100 mt_15">管理员登录</el-button>
 			<el-button type="primary" @click="login" class="ow100 mt_15 ml_0">海关登录</el-button>

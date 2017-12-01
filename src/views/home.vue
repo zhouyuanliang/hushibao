@@ -10,7 +10,7 @@
 		</div>
 		<div class="sy_body">
 			<div class="sy_left" :style="width">
-				<el-menu default-active="index" @open="handleOpen" @close="handleClose" :router="true"
+				<el-menu :default-active="curActive" @open="handleOpen" @close="handleClose" :router="true"
 					:unique-opened="true" class="el-menu-vertical-demo" :collapse="isCollapse"
 					background-color="#134e54" text-color="#fff" style="height: 100%;">
 					<el-radio-group v-model="isCollapse" class="mb_10 mt_5" size="small">
@@ -48,7 +48,8 @@ export default {
 		return {
 			userName: localStorage.userName,
 			isCollapse: false,
-			width: 'width: 200px;'
+			width: 'width: 200px;',
+			curActive: '/index'
 		}
 	},
 	methods: {
