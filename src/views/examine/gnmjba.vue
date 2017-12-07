@@ -32,8 +32,8 @@
 			    <el-table-column label="操作" min-width="220">
 					<template scope='scope'>
 						<el-button type="primary" plain size="mini">修改</el-button>
-						<el-button type="success" plain size="mini">查看</el-button>
-						<el-button type="danger" plain size="mini">删除</el-button>
+						<el-button type="success" plain size="mini" @click="baDialog = true">查看</el-button>
+						<el-button type="danger" plain size="mini" @click="delData(scope)">删除</el-button>
 			    	</template>
 			    </el-table-column>
 			</el-table>
@@ -44,6 +44,31 @@
 				<el-button type="primary" size="small" class="w100">新增</el-button>
 			</sy-pages>
 		</el-card>
+
+		<!-- 备案详情window -->
+		<el-dialog title="备案详情信息" width="60%" :visible.sync="baDialog">
+			<p>基本信息</p>
+			<el-form :model="form">
+			    <el-form-item label="联系人" :label-width="formLabelWidth">
+			    	<el-input v-model="form.name" auto-complete="off"></el-input>
+			    </el-form-item>
+			    <el-form-item label="身份" :label-width="formLabelWidth">
+			    	<el-select v-model="form.region" placeholder="请选择活动区域">
+				        <el-option label="企业" value="1"></el-option>
+				        <el-option label="个人" value="2"></el-option>
+			    	</el-select>
+			    </el-form-item>
+			</el-form>
+			<hr>
+			<p>营业信息</p>
+			<div style="height: 111px; color: red;">
+				营业信息营业信息营业信息营业信息
+			</div>
+			<div slot="footer" class="dialog-footer">
+			  	<el-button @click="baDialog = false">取 消</el-button>
+			    <el-button type="primary" @click="baDialog = false">确 定</el-button>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -54,17 +79,18 @@ export default {
 		return {
 			shopName: '',
 			dates: '',
-			dataList: {
-				list: [],
-				page: {
-					pageNo: 1,
-					pageSize: 20,
-					total: 0
-				}
-			}
+			dataList: this.$store.state.dataList,
+			//用户详情
+	        baDialog: false,
+	        form: {
+	          name: 'sheny',
+	          region: '1',
+	        },
+	        formLabelWidth: '120px'
 		}
 	},
 	methods: {
+		//获取数据列表
 		get_dataList(pageNo, pageSize){
 			let params = {
 					shopName: this.shopName,
@@ -79,8 +105,24 @@ export default {
 				console.log(err);
 			})
 		},
-		haha(str){
-			console.log(str)
+		//删除
+		delData(obj){
+			this.$confirm('此操作将永久删除本条数据, 是否继续?', '提示', {
+	        	confirmButtonText: '确定',
+	        	cancelButtonText: '取消',
+	        	type: 'warning'
+	        }).then(() => {
+	        	this.$message({
+		            type: 'success',
+		            message: '删除成功!'
+	        	});
+	        	this.dataList.list.splice(obj.$index, 1)
+	        }).catch(() => {
+	        	this.$message({
+		            type: 'info',
+		            message: '已取消删除'
+	        	});          
+	        });
 		}
 	},
 	mounted(){
