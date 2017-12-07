@@ -54,14 +54,7 @@ export default {
 		return {
 			shopName: '',
 			dates: '',
-			dataList: {
-				list: [],
-				page: {
-					pageNo: 1,
-					pageSize: 20,
-					total: 0
-				}
-			}
+			dataList: this.$store.state.dataList
 		}
 	},
 	methods: {
@@ -78,9 +71,6 @@ export default {
 			}).catch(err => {
 				console.log(err);
 			})
-		},
-		haha(str){
-			console.log(str)
 		}
 	},
 	mounted(){
