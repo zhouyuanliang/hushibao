@@ -1,13 +1,13 @@
 import Vue from 'vue'
 
-// import Topbar from './topbar/topBar'
+import syPages from './sy-pages/sy-pages'
 
 
 
 
 const install = (Vue, options) => {
     // 公共组件
-    // Vue.component('sy-topbar', Topbar);
+    Vue.component('sy-pages', syPages);
 
 };
 export default {
